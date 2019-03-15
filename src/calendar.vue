@@ -237,7 +237,7 @@
         <!-- {{monthString}} -->
         <div class="month">
           <div class="month-inner" :style="{'top':-(this.month*20)+'px'}">
-            <span v-for="m in months" :key="m" >{{m}}</span>
+            <span v-for="(m, i) in months" :key="i" >{{m}}</span>
           </div>
         </div>
         <div class="year">{{year}}</div>
@@ -246,12 +246,12 @@
     <table cellpadding="5">
       <thead>
         <tr>
-          <td v-for="week in weeks" class="week" :key="week" >{{week}}</td>
+          <td v-for="(week, i) in weeks" class="week" :key="i" >{{week}}</td>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(day,k1) in days" style="{'animation-delay',(k1*30)+'ms'}" :key="day" >
-          <td v-for="(child,k2) in day" :key="child" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event)">
+        <tr v-for="(day,k1) in days" style="{'animation-delay',(k1*30)+'ms'}" :key="k1" >
+          <td v-for="(child,k2) in day" :key="k2" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event)">
             <span :class="{'red':k2==0||k2==6||((child.isLunarFestival||child.isGregorianFestival) && lunar)}">{{child.day}}</span>
             <div class="text" v-if="child.eventName!=undefined">{{child.eventName}}</div>
             <div class="text" :class="{'isLunarFestival':child.isLunarFestival,'isGregorianFestival':child.isGregorianFestival}" v-if="lunar">{{child.lunar}}</div>
